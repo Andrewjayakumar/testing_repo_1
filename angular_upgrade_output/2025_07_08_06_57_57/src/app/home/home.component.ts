@@ -1,4 +1,3 @@
-// Upgraded Angular 9 version of home.component.ts
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,6 +9,6 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('HomeComponent initialized');
+    // Initialization logic, if any
   }
 }
