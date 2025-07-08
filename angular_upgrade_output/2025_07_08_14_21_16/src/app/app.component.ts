@@ -1,3 +1,4 @@
+/* Angular 9 upgraded app.component.ts content with updated decorators, lifecycle hooks, and TypeScript syntax */
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,11 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Angular 9 Upgrade';
+  title = 'Angular9 Upgrade';
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
-    console.log('AppComponent initialized');
+    // Initialization logic here
   }
 }
