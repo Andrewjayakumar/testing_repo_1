@@ -9,6 +9,6 @@ export class AppComponent implements OnInit {
   title = 'legacy-angular-project';
 
   ngOnInit() {
-    // Initialization logic updated for Angular 9
+    // Angular 9 initialization logic
   }
 }
