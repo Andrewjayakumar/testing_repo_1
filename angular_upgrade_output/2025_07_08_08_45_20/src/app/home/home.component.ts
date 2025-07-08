@@ -10,7 +10,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // Initialization logic for the home component
+    // Initialization logic for Angular 9
   }
 
 }
