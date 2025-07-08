@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'Angular 9 Upgrade';
 
-  ngOnInit() {
+  ngOnInit(): void {
     // Initialization logic here
   }
 }
