@@ -6,11 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'My Angular 9 App';
+  title = 'Angular 9 Upgrade';
 
-  constructor() { }
-
-  ngOnInit(): void {
+  ngOnInit() {
     // Initialization logic here
   }
 }
