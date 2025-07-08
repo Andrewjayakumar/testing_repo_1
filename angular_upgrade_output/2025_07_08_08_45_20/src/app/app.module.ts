@@ -1,4 +1,4 @@
-// Angular 9 upgraded app.module.ts
+// Upgraded Angular 9 app.module.ts content
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
