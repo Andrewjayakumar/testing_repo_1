@@ -8,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'My Angular 9 App';
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
-    // initialization logic here
+    // Initialization logic here
   }
 }
