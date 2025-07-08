@@ -1,3 +1,4 @@
+// Upgraded Angular 9 home.component.ts content
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,11 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit(): void {
-    // Place initialization logic here.
+    // Initialize component
   }
 
+  // Additional Angular 9 compatible logic can go here
 }
