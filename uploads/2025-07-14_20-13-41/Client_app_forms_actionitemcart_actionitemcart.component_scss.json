@@ -1,0 +1,28 @@
+```typescript
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
+import { AppComponent } from './app.component';
+
+// Define your application's routes here using the latest Angular Router API.
+const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  // Additional routes go here.
+];
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    // Other components, directives, and pipes can be declared here.
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule, // Replaces deprecated HttpModule.
+    RouterModule.forRoot(routes) // Modern Angular routing setup.
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
