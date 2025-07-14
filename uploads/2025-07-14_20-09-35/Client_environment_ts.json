@@ -1,0 +1,6 @@
+```typescript
+export class DataServiceOptions {
+  baseUrl: string = 'https://api.example.com';
+  timeout: number = 3000;
+}
+```
