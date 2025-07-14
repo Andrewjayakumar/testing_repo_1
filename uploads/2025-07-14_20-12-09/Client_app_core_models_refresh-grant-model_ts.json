@@ -1,0 +1,32 @@
+```
+
+```json
+{
+  "angular.json": {
+    "content": "{\n  \"version\": 2,\n  \"projects\": {\n    \"my-app\": {\n      \"projectType\": \"application\",\n      \"root\": \"\",\n      \"sourceRoot\": \"src\",\n      \"prefix\": \"app\",\n      \"architect\": {\n        \"build\": {\n          \"builder\": \"@angular-devkit/build-angular:browser\",\n          \"options\": {\n            \"outputPath\": \"dist/my-app\",\n            \"index\": \"src/index.html\",\n            \"main\": \"src/main.ts\",\n            \"polyfills\": \"src/polyfills.ts\",\n            \"tsConfig\": \"tsconfig.app.json\",\n            \"assets\": [\n              \"src/favicon.ico\",\n              \"src/assets\"\n            ],\n            \"styles\": [\n              \"src/styles.scss\"\n            ],\n            \"scripts\": []\n          },\n          \"configurations\": {\n            \"production\": {\n              \"fileReplacements\": [\n                {\n                  \"replace\": \"src/environments/environment.ts\",\n                  \"with\": \"src/environments/environment.prod.ts\"\n                }\n              ],\n              \"optimization\": true,\n              \"outputHashing\": \"all\",\n              \"sourceMap\": false,\n              \"namedChunks\": false,\n              \"extractLicenses\": true,\n              \"vendorChunk\": false,\n              \"buildOptimizer\": true\n            }\n          }\n        },\n        \"serve\": {\n          \"builder\": \"@angular-devkit/build-angular:dev-server\",\n          \"options\": {\n            \"browserTarget\": \"my-app:build\"\n          },\n          \"configurations\": {\n            \"production\": {\n              \"browserTarget\": \"my-app:build:production\"\n            }\n          }\n        },\n        \"extract-i18n\": {\n          \"builder\": \"@angular-devkit/build-angular:extract-i18n\",\n          \"options\": {\n            \"browserTarget\": \"my-app:build\"\n          }\n        },\n        \"test\": {\n          \"builder\": \"@angular-devkit/build-angular:karma\",\n          \"options\": {\n            \"main\": \"src/test.ts\",\n            \"polyfills\": \"src/polyfills.ts\",\n            \"tsConfig\": \"tsconfig.spec.json\",\n            \"karmaConfig\": \"karma.conf.js\",\n            \"assets\": [\n              \"src/favicon.ico\",\n              \"src/assets\"\n            ],\n            \"styles\": [\n              \"src/styles.scss\"\n            ],\n            \"scripts\": []\n          }\n        },\n        \"lint\": {\n          \"builder\": \"@angular-devkit/build-angular:tslint\",\n          \"options\": {\n            \"tsConfig\": [\n              \"tsconfig.app.json\",\n              \"tsconfig.spec.json\",\n              \"e2e/tsconfig.json\"\n            ],\n            \"exclude\": [\n              \"**/node_modules/**\"\n            ]\n          }\n        }\n      }\n    }\n  },\n  \"defaultProject\": \"my-app\"\n}"
+  },
+  "tsconfig.json": {
+    "content": "{\n  \"compileOnSave\": false,\n  \"compilerOptions\": {\n    \"outDir\": \"./dist/out-tsc\",\n    \"sourceMap\": true,\n    \"declaration\": false,\n    \"moduleResolution\": \"node\",\n    \"emitDecoratorMetadata\": true,\n    \"experimentalDecorators\": true,\n    \"target\": \"es2020\",\n    \"module\": \"es2020\",\n    \"lib\": [\n      \"es2020\",\n      \"dom\"\n    ],\n    \"skipLibCheck\": true,\n    \"strict\": true\n  }\n}"
+  },
+  "src/main.ts": {
+    "content": "import { enableProdMode } from '@angular/core';\nimport { platformBrowserDynamic } from '@angular/platform-browser-dynamic';\n\nimport { AppModule } from './app/app.module';\nimport { environment } from './environments/environment';\n\nif (environment.production) {\n  enableProdMode();\n}\n\nplatformBrowserDynamic()\n  .bootstrapModule(AppModule)\n  .catch(err => console.error(err));\n"
+  },
+  "src/polyfills.ts": {
+    "content": "/***************************************************************************************************\n * BROWSER POLYFILLS\n */\n\n/** IE11 requires the following for NgClass support on SVG elements */\n// import 'classlist.js';  // Run `npm install --save classlist.js`\n\n/** Evergreen browsers require these. **/\nimport 'core-js/es/reflect';\nimport 'zone.js';  // Included with Angular CLI.\n\n/***************************************************************************************************\n * APPLICATION IMPORTS\n */\n"
+  },
+  "src/app/app.module.ts": {
+    "content": "import { BrowserModule } from '@angular/platform-browser';\nimport { NgModule } from '@angular/core';\nimport { HttpClientModule } from '@angular/common/http';\nimport { AppRoutingModule } from './app-routing.module';\n\nimport { AppComponent } from './app.component';\n\n@NgModule({\n  declarations: [\n    AppComponent\n    // other components can be added here\n  ],\n  imports: [\n    BrowserModule,\n    HttpClientModule,\n    AppRoutingModule\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n"
+  },
+  "src/app/app-routing.module.ts": {
+    "content": "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\n\nimport { AppComponent } from './app.component';\n\nconst routes: Routes = [\n  { path: '', component: AppComponent }\n];\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes, { initialNavigation: 'enabledBlocking' })],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule { }\n"
+  },
+  "src/app/app.component.ts": {
+    "content": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent {\n  title = 'my-app';\n}\n"
+  },
+  "src/app/app.component.html": {
+    "content": "<h1>Welcome to {{ title }}!</h1>\n"
+  },
+  "src/app/app.component.scss": {
+    "content": "h1 {\n  color: #1976d2;\n}\n"
+  }
+}
