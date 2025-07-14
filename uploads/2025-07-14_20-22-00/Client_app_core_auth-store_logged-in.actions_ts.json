@@ -1,0 +1,8 @@
+```typescript
+import { createAction, props } from '@ngrx/store';
+
+export const loggedIn = createAction(
+  '[Auth] Logged In',
+  props<{ user: any }>()
+);
+```
