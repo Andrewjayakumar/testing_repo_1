@@ -1,0 +1,29 @@
+```
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-candidatesubmission',
+  templateUrl: './candidatesubmission.component.html',
+  styleUrls: ['./candidatesubmission.component.css']
+})
+export class CandidateSubmissionComponent implements OnInit {
+
+  candidates: any[];
+
+  constructor(private http: HttpClient) { }
+
+  ngOnInit() {
+    this.http.get<any[]>('/api/candidates')
+      .pipe(
+        map(data => data)
+      )
+      .subscribe(data => {
+        this.candidates = data;
+      });
+  }
+
+}
