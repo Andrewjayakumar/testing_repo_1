@@ -1,0 +1,33 @@
+```
+
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+```html
+<div>
+  <h2>Autocomplete UI Component</h2>
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." />
+  <ul>
+    <li *ngFor="let item of filteredItems">
+      {{item}}
+    </li>
+  </ul>
+</div>
