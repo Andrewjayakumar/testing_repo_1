@@ -1,0 +1,1 @@
+{"detail":"Unexpected error in pipeline execution: 400: Client error '400 Bad Request' for url 'https://da-api-admin-metal-nexus.azurewebsites.net/v1/api/admin/ava/force/workflow/payload?workflowId=110'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400"}
