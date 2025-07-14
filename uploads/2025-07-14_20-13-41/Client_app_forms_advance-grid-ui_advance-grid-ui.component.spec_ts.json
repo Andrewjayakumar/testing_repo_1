@@ -1,0 +1,12 @@
+```typescript
+import { createAction, createReducer, on } from '@ngrx/store';
+
+export const loggedIn = createAction('[Auth] Logged In');
+
+export const initialState = false;
+
+export const loggedInReducer = createReducer(
+  initialState,
+  on(loggedIn, state => true)
+);
+```
