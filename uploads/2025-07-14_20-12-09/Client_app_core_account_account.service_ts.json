@@ -1,0 +1,58 @@
+```typescript
+import { Routes } from '@angular/router';
+import { LoginComponent } from './login.component';
+
+export const loginRoutes: Routes = [
+  { path: 'login', component: LoginComponent }
+];
+```
+
+```typescript
+export function formatActionName(action: string): string {
+  return action.replace(/_/g, ' ').toUpperCase();
+}
+```
+
+```typescript
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthStore {
+  private authTokenSubject = new BehaviorSubject<string | null>(null);
+  authToken$ = this.authTokenSubject.asObservable();
+
+  setAuthToken(token: string) {
+    this.authTokenSubject.next(token);
+  }
+}
+```
+
+```typescript
+export interface AuthTokensModel {
+  accessToken: string;
+  refreshToken: string;
+}
+```
+
+```typescript
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UtilityService {
+  log(message: string): void {
+    console.log(message);
+  }
+}
+```
+
+```typescript
+export interface DataServiceOptions {
+  skipCache?: boolean;
+  forceRefresh?: boolean;
+}
+```
