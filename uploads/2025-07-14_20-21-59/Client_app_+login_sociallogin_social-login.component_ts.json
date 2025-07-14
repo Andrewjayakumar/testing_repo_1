@@ -1,0 +1,10 @@
+<!-- candidatesubmission.component.html -->
+<div *ngIf="candidate as c; else loading">
+  <h2>{{ c.name }}</h2>
+  <ul>
+    <li *ngFor="let skill of c.skills">{{ skill }}</li>
+  </ul>
+</div>
+<ng-template #loading>
+  <p>Loading candidate data...</p>
+</ng-template>
