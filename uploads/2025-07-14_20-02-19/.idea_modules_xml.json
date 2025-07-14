@@ -1,0 +1,51 @@
+```typescript
+// File: src/app/app.module.ts
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
+
+```typescript
+// File: src/app/app.component.ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent {
+  title = 'latest-angular-app';
+}
+```
+
+```html
+<!-- File: src/app/app.component.html -->
+<div class="app-container">
+  <h1>{{ title }}</h1>
+  <p>Welcome to the upgraded Angular application!</p>
+</div>
+```
+
+```scss
+/* File: src/app/app.component.scss */
+.app-container {
+  padding: 20px;
+  text-align: center;
+}
+```
