@@ -1,0 +1,24 @@
+```
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-auth-callback',
+  templateUrl: './auth-callback.component.html',
+  styleUrls: ['./auth-callback.component.scss']
+})
+export class AuthCallbackComponent implements OnInit {
+
+  constructor(private http: HttpClient) { }
+
+  ngOnInit(): void {
+    this.http.get('/api/auth/callback')
+      .subscribe(response => {
+        console.log('Callback response', response);
+      }, error => {
+        console.error('Callback error', error);
+      });
+  }
+
+}
