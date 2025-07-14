@@ -1,0 +1,21 @@
+```typescript
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { AuthGuard } from "./core/authservice/auth-guard.service";
+import { AuthCallbackComponent } from "./auth-callback/auth-callback.component";
+import { RolesComponent } from "./roles/roles.component";
+
+export const routes: Routes = [
+  { path: '', canActivate: [AuthGuard], loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+  { path: 'apps', canActivate: [AuthGuard], loadChildren: () => import('./application/application.module').then(m => m.ApplicationModule) },
+  { path: 'login', loadChildren: () => import('./+login/login.module').then(m => m.LoginModule) },
+  {
+    path: 'auth-callback', component: AuthCallbackComponent,
+    children: [{ path: ':id', component: AuthCallbackComponent }]
+  },
+  { path: 'selectrole', component: RolesComponent },
+  { path: 'submission', loadChildren: () => import('./approval/approval.module').then(m => m.ApprovalModule) },
+  { path: 'projects', canActivate: [AuthGuard], loadChildren: () => import('./itss-project/itss-project.module').then(m => m.ItssprojectModule) }
+];
+
+export const routing = RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules });
+```
