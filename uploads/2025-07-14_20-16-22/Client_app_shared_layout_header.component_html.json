@@ -1,0 +1,30 @@
+```html
+<header>
+  <nav>
+    <ul>
+      <li><a routerLink="/register">Register</a></li>
+      <li><a routerLink="/login">Login</a></li>
+    </ul>
+    <div class="welcome-message">
+      Welcome, {{ auth.currentUser.firstName }}
+    </div>
+    <div class="role-info">
+      {{ item.rolename }}
+    </div>
+    <div class="profile-menu">
+      <ul>
+        <li><a routerLink="/profile">Profile</a></li>
+        <li><a routerLink="/payment">Payment</a></li>
+        <li><a routerLink="/users">Users</a></li>
+        <li><a routerLink="/groups">Groups</a></li>
+        <li><a routerLink="/change-password">Change Password</a></li>
+        <li><a routerLink="/logout">Logout</a></li>
+        <li><a routerLink="/groups">Groups</a></li>
+      </ul>
+    </div>
+    <div class="row-info">
+      {{ row }}
+    </div>
+  </nav>
+</header>
+```
