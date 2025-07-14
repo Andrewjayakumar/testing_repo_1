@@ -1,0 +1,64 @@
+```json
+{
+  "angular.json": {
+    "language": "json",
+    "content": "{\n  \"$schema\": \"./node_modules/@angular/cli/lib/config/schema.json\",\n  \"version\": 1,\n  \"newProjectRoot\": \"projects\",\n  \"projects\": {\n    \"my-angular-app\": {\n      \"projectType\": \"application\",\n      \"schematics\": {},\n      \"root\": \"\",\n      \"sourceRoot\": \"src\",\n      \"prefix\": \"app\",\n      \"architect\": {\n        \"build\": {\n          \"builder\": \"@angular-devkit/build-angular:browser\",\n          \"options\": {\n            \"outputPath\": \"dist/my-angular-app\",\n            \"index\": \"src/index.html\",\n            \"main\": \"src/main.ts\",\n            \"polyfills\": \"src/polyfills.ts\",\n            \"tsConfig\": \"tsconfig.app.json\",\n            \"assets\": [\n              \"src/favicon.ico\",\n              \"src/assets\"\n            ],\n            \"styles\": [\n              \"src/styles.scss\"\n            ],\n            \"scripts\": []\n          },\n          \"configurations\": {\n            \"production\": {\n              \"budgets\": [\n                {\n                  \"type\": \"initial\",\n                  \"maximumWarning\": \"2mb\",\n                  \"maximumError\": \"5mb\"\n                }\n              ],\n              \"fileReplacements\": [\n                {\n                  \"replace\": \"src/environments/environment.ts\",\n                  \"with\": \"src/environments/environment.prod.ts\"\n                }\n              ],\n              \"optimization\": true,\n              \"outputHashing\": \"all\",\n              \"sourceMap\": false,\n              \"extractCss\": true,\n              \"namedChunks\": false,\n              \"extractLicenses\": true,\n              \"vendorChunk\": false,\n              \"buildOptimizer\": true\n            }\n          }\n        },\n        \"serve\": {\n          \"builder\": \"@angular-devkit/build-angular:dev-server\",\n          \"options\": {\n            \"browserTarget\": \"my-angular-app:build\"\n          },\n          \"configurations\": {\n            \"production\": {\n              \"browserTarget\": \"my-angular-app:build:production\"\n            }\n          }\n        }\n      }\n    }\n  },\n  \"defaultProject\": \"my-angular-app\"\n}\n"
+  },
+  "package.json": {
+    "language": "json",
+    "content": "{\n  \"name\": \"my-angular-app\",\n  \"version\": \"0.0.1\",\n  \"scripts\": {\n    \"ng\": \"ng\",\n    \"start\": \"ng serve\",\n    \"build\": \"ng build\",\n    \"test\": \"ng test\",\n    \"lint\": \"ng lint\",\n    \"e2e\": \"ng e2e\"\n  },\n  \"private\": true,\n  \"dependencies\": {\n    \"@angular/animations\": \"~15.0.0\",\n    \"@angular/common\": \"~15.0.0\",\n    \"@angular/compiler\": \"~15.0.0\",\n    \"@angular/core\": \"~15.0.0\",\n    \"@angular/forms\": \"~15.0.0\",\n    \"@angular/platform-browser\": \"~15.0.0\",\n    \"@angular/platform-browser-dynamic\": \"~15.0.0\",\n    \"@angular/router\": \"~15.0.0\",\n    \"rxjs\": \"~7.5.0\",\n    \"tslib\": \"^2.3.0\",\n    \"zone.js\": \"~0.12.0\"\n  },\n  \"devDependencies\": {\n    \"@angular-devkit/build-angular\": \"~15.0.0\",\n    \"@angular/cli\": \"~15.0.0\",\n    \"@angular/compiler-cli\": \"~15.0.0\",\n    \"@types/node\": \"^12.11.1\",\n    \"typescript\": \"~4.8.2\"\n  }\n}\n"
+  },
+  "tsconfig.json": {
+    "language": "json",
+    "content": "{\n  \"compileOnSave\": false,\n  \"compilerOptions\": {\n    \"baseUrl\": \"./\",\n    \"outDir\": \"./dist/out-tsc\",\n    \"sourceMap\": true,\n    \"declaration\": false,\n    \"downlevelIteration\": true,\n    \"experimentalDecorators\": true,\n    \"module\": \"es2020\",\n    \"moduleResolution\": \"node\",\n    \"importHelpers\": true,\n    \"target\": \"es2020\",\n    \"typeRoots\": [\n      \"node_modules/@types\"\n    ],\n    \"lib\": [\n      \"es2020\",\n      \"dom\"\n    ]\n  }\n}\n"
+  },
+  "tsconfig.app.json": {
+    "language": "json",
+    "content": "{\n  \"extends\": \"./tsconfig.json\",\n  \"compilerOptions\": {\n    \"outDir\": \"./out-tsc/app\",\n    \"types\": []\n  },\n  \"files\": [\n    \"src/main.ts\",\n    \"src/polyfills.ts\"\n  ],\n  \"include\": [\n    \"src/**/*.d.ts\"\n  ]\n}\n"
+  },
+  "src/app/app.module.ts": {
+    "language": "typescript",
+    "content": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { HttpClientModule } from '@angular/common/http';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\n\n@NgModule({\n  declarations: [\n    AppComponent\n  ],\n  imports: [\n    BrowserModule,\n    HttpClientModule,\n    AppRoutingModule\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n"
+  },
+  "src/app/app-routing.module.ts": {
+    "language": "typescript",
+    "content": "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\nimport { AppComponent } from './app.component';\n\nconst routes: Routes = [\n  { path: '', component: AppComponent }\n];\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes)],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule { }\n"
+  },
+  "src/app/app.component.ts": {
+    "language": "typescript",
+    "content": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent {\n  title = 'my-angular-app';\n}\n"
+  },
+  "src/app/app.component.html": {
+    "language": "html",
+    "content": "<div style=\"text-align:center\">\n  <h1>Welcome to {{ title }}!</h1>\n  <router-outlet></router-outlet>\n</div>\n"
+  },
+  "src/app/app.component.scss": {
+    "language": "scss",
+    "content": "/* Styles for AppComponent */\nh1 {\n  font-family: Lato, sans-serif;\n}\n"
+  },
+  "src/main.ts": {
+    "language": "typescript",
+    "content": "import { enableProdMode } from '@angular/core';\nimport { platformBrowserDynamic } from '@angular/platform-browser-dynamic';\n\nimport { AppModule } from './app/app.module';\nimport { environment } from './environments/environment';\n\nif (environment.production) {\n  enableProdMode();\n}\n\nplatformBrowserDynamic().bootstrapModule(AppModule)\n  .catch(err => console.error(err));\n"
+  },
+  "src/polyfills.ts": {
+    "language": "typescript",
+    "content": "import 'zone.js';  // Included with Angular CLI.\n"
+  },
+  "src/environments/environment.ts": {
+    "language": "typescript",
+    "content": "export const environment = {\n  production: false\n};\n"
+  },
+  "src/environments/environment.prod.ts": {
+    "language": "typescript",
+    "content": "export const environment = {\n  production: true\n};\n"
+  },
+  "src/styles.scss": {
+    "language": "scss",
+    "content": "/* Global styles */\nbody {\n  margin: 0;\n  font-family: Roboto, \"Helvetica Neue\", sans-serif;\n}\n"
+  },
+  "src/index.html": {
+    "language": "html",
+    "content": "<!doctype html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\">\n    <title>My Angular App</title>\n    <base href=\"/\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n  </head>\n  <body>\n    <app-root></app-root>\n  </body>\n</html>\n"
+  }
+}
+```
