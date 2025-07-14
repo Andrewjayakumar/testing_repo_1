@@ -1,0 +1,14 @@
+```html
+<div *ngIf="data$ | async as data; else loading">
+  <h1>{{ data.title }}</h1>
+  <p>{{ data.description }}</p>
+  <ul>
+    <li *ngFor="let item of data.items">
+      {{ item.name }} - {{ item.value }}
+    </li>
+  </ul>
+</div>
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>
+```
