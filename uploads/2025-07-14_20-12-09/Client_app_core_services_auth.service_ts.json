@@ -1,0 +1,36 @@
+For activity.service.ts
+```typescript
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ActivityService {
+  private apiUrl = 'https://api.example.com/activities';
+
+  constructor(private http: HttpClient) {}
+
+  getActivities(): Observable<any> {
+    return this.http.get<any>(this.apiUrl).pipe(
+      map(data => data),
+      catchError(error => throwError(error.error || 'Server error'))
+    );
+  }
+}
+```
+
+For actionitemcart.component.html
+```html
+<div class="action-item-cart">
+  <h2>Action Item Cart</h2>
+  <ul>
+    <li *ngFor="let item of cartItems">
+      {{ item.name }} - {{ item.quantity }}
+    </li>
+  </ul>
+  <button (click)="checkout()">Checkout</button>
+</div>
+```
