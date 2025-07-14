@@ -1,0 +1,7 @@
+```typescript
+export interface RefreshGrantModel {
+  accessToken: string;
+  refreshToken: string;
+  expiresIn: number;
+}
+```
