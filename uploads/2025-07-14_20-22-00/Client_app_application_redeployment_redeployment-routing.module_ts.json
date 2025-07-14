@@ -1,0 +1,21 @@
+```typescript
+// Updated file: /Client/app/+login/login.routes.ts
+import { Routes } from '@angular/router';
+
+export const LoginRoutes: Routes = [
+  {
+    path: 'login',
+    loadChildren: () => import('./login.module').then(m => m.LoginModule)
+  }
+];
+```
+
+```typescript
+// Updated file: /Client/boot.browser.ts
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModule } from './app/app.module';
+
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
+  .catch(err => console.error(err));
+```
