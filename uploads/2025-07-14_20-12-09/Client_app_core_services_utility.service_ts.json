@@ -1,0 +1,75 @@
+---- File: Client/app/+login/login.routes.ts ----
+```typescript
+import { Routes } from '@angular/router';
+import { LoginComponent } from './login.component';
+
+export const LoginRoutes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent,
+    data: { title: 'Login' }
+  }
+];
+```
+
+---- File: Client/app/core/auth-store/auth.store.ts ----
+```typescript
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthStore {
+  private authState = new BehaviorSubject<any>(null);
+
+  setAuthState(state: any): void {
+    this.authState.next(state);
+  }
+
+  getAuthState() {
+    return this.authState.asObservable();
+  }
+}
+```
+
+---- File: Client/app/core/util/action-name-helper.ts ----
+```typescript
+export function formatActionName(action: string): string {
+  return action.trim().replace(/\s+/g, '_').toUpperCase();
+}
+```
+
+---- File: Client/app/core/models/auth-tokens-model.ts ----
+```typescript
+export interface AuthTokens {
+  accessToken: string;
+  refreshToken: string;
+}
+```
+
+---- File: Client/app/core/services/utility.service.ts ----
+```typescript
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UtilityService {
+  constructor() {}
+
+  formatDate(date: Date): string {
+    return date.toISOString();
+  }
+
+  // Add other utility methods as needed
+}
+```
+
+---- File: Client/app/core/services/data-service-options.ts ----
+```typescript
+export interface DataServiceOptions {
+  retryAttempts?: number;
+  useCache?: boolean;
+}
+```
