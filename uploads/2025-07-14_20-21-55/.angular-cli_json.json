@@ -1,0 +1,91 @@
+```typescript
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
+import { AppComponent } from './app.component';
+
+const appRoutes: Routes = [
+  // Define your application routes here
+];
+
+@NgModule({
+  declarations: [
+    AppComponent
+    // Add other migrated components, directives, and pipes here
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,  // Replaces the deprecated HttpModule
+    RouterModule.forRoot(appRoutes)
+  ],
+  providers: [
+    // Add services with Angular’s new dependency injection mechanisms here
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
+import { of } from 'rxjs';
+
+@Component({
+  selector: 'app-root',
+  template: `
+    <h1>Angular Migration Sample</h1>
+    <div *ngIf="data | async as response; else loading">
+      <pre>{{ response | json }}</pre>
+    </div>
+    <ng-template #loading>
+      Loading data...
+    </ng-template>
+  `
+})
+export class AppComponent implements OnInit {
+  data: any;
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.data = this.http.get('/api/data').pipe(
+      map(res => res),
+      catchError(error => {
+        console.error('Error fetching data', error);
+        return of({ error: true, message: 'Could not load data' });
+      })
+    );
+  }
+}
+``` 
+
+```typescript
+// Example of a migrated service using the latest RxJS pipeable operators
+
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DataService {
+  private apiEndpoint = '/api/data';
+
+  constructor(private http: HttpClient) {}
+
+  getData(): Observable<any> {
+    return this.http.get(this.apiEndpoint).pipe(
+      map(response => response),
+      catchError(error => {
+        console.error('DataService encountered an error', error);
+        return throwError(error);
+      })
+    );
+  }
+}
+```
