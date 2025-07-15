@@ -1,0 +1,25 @@
+```
+typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+    // other components, directives, and pipes can be declared here
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule
+    // other Angular or third-party modules can be imported here
+  ],
+  providers: [
+    // any injectable services can be provided here
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
