@@ -1,0 +1,46 @@
+```
+typescript
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-resumes-journals',
+  templateUrl: './resumes-journals.component.html',
+  styleUrls: ['./resumes-journals.component.scss']
+})
+export class ResumesJournalsComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+    // Initialization logic
+  }
+}
+```
+
+```
+typescript
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { CalenderUiComponent } from './calender-ui.component';
+
+describe('CalenderUiComponent', () => {
+  let component: CalenderUiComponent;
+  let fixture: ComponentFixture<CalenderUiComponent>;
+
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ CalenderUiComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(CalenderUiComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+```
