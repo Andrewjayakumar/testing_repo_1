@@ -1,0 +1,61 @@
+```typescript
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { DataService } from '../../core/services/data.service';
+import { DataServiceOptions } from '../../core/services/data-service-options';
+import { baseurl, authapiurl } from '../../../environment';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ItssService {
+
+  public apiurl = baseurl;
+  public secureapiurl = authapiurl;
+
+  constructor(private http: HttpClient, private dataservice: DataService) { }
+
+  getAlltheItssProjects(): Observable<any> {
+    const url = `${this.apiurl}api/MSProject/GetMsProjectsAsync`;
+    const options = this.setHttpOptions(url);
+    return this.http.get(url, options);
+  }
+
+  getSearchResults(apiparam: string): Observable<any> {
+    const url = `${this.apiurl}api/MSProject/GetMsProjectsAsync`;
+    const params = new HttpParams().set("projSearch", apiparam);
+    const options = this.setHttpOptions(url, params);
+    return this.http.get(url, options);
+  }
+
+  getProjectTypes(): Observable<any> {
+    const url = `${this.apiurl}api/Master/GetMSProjectTypesAsync`;
+    const options = this.setHttpOptions(url);
+    return this.http.get(url, options);
+  }
+
+  exporttoexcelResults(body: any): Observable<any> {
+    const url = `${this.apiurl}api/MSProject/ExportMSProjectSearchAsync`;
+    const options = this.setHttpOptions(url);
+    return this.http.post(url, body, options);
+  }
+
+  private setHttpOptions(url: string, params?: HttpParams): any {
+    let options: any = {};
+    if (params) {
+      options.params = params;
+    }
+    options = this.dataservice.addXsrfToken(options);
+    options = this.dataservice.addContentType(options);
+    options = this.dataservice.addAuthToken(options);
+    options = this.dataservice.addCors(options);
+    return options;
+  }
+
+  trackActivityPageOpened(data: any): Observable<any> {
+    const url = `${this.apiurl}api/UserActivityLog/PageTrackerAsync`;
+    return this.dataservice.postPageTracker(url, data);
+  }
+}
+```
