@@ -1,0 +1,29 @@
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+
+@Component({
+  selector: 'app-pin-to-req-popup',
+  templateUrl: './pin-to-req-popup.component.html',
+  styleUrls: ['./pin-to-req-popup.component.scss']
+})
+export class PinToReqPopupComponent implements OnInit {
+
+  constructor(private http: HttpClient) { }
+
+  ngOnInit(): void {
+    this.http.get<any>('api/data')
+      .pipe(
+        catchError(error => {
+          console.error('Error fetching data:', error);
+          return of(null);
+        })
+      )
+      .subscribe(data => {
+        console.log(data);
+      });
+  }
+}
+```
