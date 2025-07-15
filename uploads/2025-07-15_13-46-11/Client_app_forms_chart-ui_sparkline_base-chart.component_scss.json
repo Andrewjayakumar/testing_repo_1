@@ -1,0 +1,7 @@
+```html
+<div *ngIf="activityLog">
+  <div *ngFor="let activity of activityLog">
+    <p>{{ activity.timestamp }} - {{ activity.message }}</p>
+  </div>
+</div>
+```
