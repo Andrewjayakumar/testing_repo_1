@@ -1,0 +1,40 @@
+```
+typescript
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-card-option-ui',
+  templateUrl: './card-option-ui.component.html',
+  styleUrls: ['./card-option-ui.component.css']
+})
+export class CardOptionUiComponent implements OnInit {
+
+  data: any;
+
+  constructor(private http: HttpClient) { }
+
+  ngOnInit(): void {
+    this.getData().subscribe(
+      response => {
+        this.data = response;
+      },
+      error => {
+        console.error('Error fetching card options:', error);
+      }
+    );
+  }
+
+  getData(): Observable<any> {
+    return this.http.get<any>('/api/card-options')
+      .pipe(
+        catchError(error => {
+          console.error('Error caught in getData:', error);
+          throw error;
+        })
+      );
+  }
+}
+```
