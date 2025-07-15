@@ -1,0 +1,15 @@
+```
+typescript
+import { Permission } from './permission.model';
+
+export class Role {
+  public id!: string;
+  public usersCount!: string;
+
+  constructor(
+    public name?: string,
+    public description?: string,
+    public permissions?: Permission[]
+  ) {}
+}
+```
