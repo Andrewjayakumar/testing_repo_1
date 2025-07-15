@@ -1,0 +1,36 @@
+```
+typescript
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+
+@Component({
+  selector: 'app-bookmark',
+  templateUrl: './bookmark.component.html',
+  styleUrls: ['./bookmark.component.css']
+})
+export class BookmarkComponent implements OnInit {
+
+  bookmarks: any[] = [];
+
+  constructor(private http: HttpClient) { }
+
+  ngOnInit(): void {
+    this.loadBookmarks();
+  }
+
+  loadBookmarks(): void {
+    this.http.get<any[]>('/api/bookmarks')
+      .pipe(
+        catchError(error => {
+          console.error('Error loading bookmarks:', error);
+          return of([]);
+        })
+      )
+      .subscribe(data => {
+        this.bookmarks = data;
+      });
+  }
+}
+```
