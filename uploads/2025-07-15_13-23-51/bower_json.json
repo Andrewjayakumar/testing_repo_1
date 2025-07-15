@@ -1,0 +1,60 @@
+```
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModule } from './app/app.module';
+
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
+```
+
+```
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:3000/api'
+};
+```
+
+```
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, HttpClientModule],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
+
+```
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html'
+})
+export class AppComponent {
+  title = 'Angular App';
+
+  constructor(private http: HttpClient) {}
+
+  fetchData() {
+    this.http.get('/api/data').pipe(
+      catchError(error => {
+        console.error(error);
+        return throwError(error);
+      })
+    ).subscribe(data => console.log(data));
+  }
+}
+```
+
+```
+<h1>{{ title }}</h1>
+<button (click)="fetchData()">Fetch Data</button>
+```
