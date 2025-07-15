@@ -1,0 +1,247 @@
+```typescript
+// File: src/app/app.module.ts
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+```typescript
+// File: src/app/app.component.ts
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent implements OnInit {
+  title = 'angular-upgrade-project';
+
+  constructor() { }
+
+  ngOnInit(): void {
+    // Initialization logic can be added here
+  }
+}
+```
+
+```html
+<!-- File: src/app/app.component.html -->
+<div style="text-align:center">
+  <h1>Welcome to the Angular Upgrade Project!</h1>
+  <p>
+    This project has been successfully upgraded to use the latest Angular standards.
+  </p>
+  <router-outlet></router-outlet>
+</div>
+```
+
+```scss
+/* File: src/app/app.component.scss */
+:host {
+  display: block;
+  padding: 16px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #1976d2;
+}
+
+p {
+  font-size: 1.2rem;
+  color: #424242;
+}
+```
+
+```typescript
+// File: src/main.ts
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
+
+if (environment.production) {
+  enableProdMode();
+}
+
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
+```
+
+```typescript
+// File: src/polyfills.ts
+/**
+ * This file includes polyfills needed by Angular and is loaded before the app.
+ * You can add your own extra polyfills to this file.
+ *
+ * The current setup is for modern browsers.
+ */
+
+/***************************************************************************************************
+ * BROWSER POLYFILLS
+ */
+// Uncomment below if supporting IE11 (or other older browsers):
+// import 'core-js/es/symbol';
+// import 'core-js/es/object';
+// import 'core-js/es/function';
+// import 'core-js/es/parse-int';
+// import 'core-js/es/parse-float';
+// import 'core-js/es/number';
+// import 'core-js/es/math';
+// import 'core-js/es/string';
+// import 'core-js/es/date';
+// import 'core-js/es/array';
+// import 'core-js/es/regexp';
+// import 'core-js/es/map';
+// import 'core-js/es/set';
+
+/***************************************************************************************************
+ * Zone JS is required by Angular itself.
+ */
+import 'zone.js';  // Included with Angular CLI.
+
+/***************************************************************************************************
+ * APPLICATION IMPORTS
+ */
+// Add any global imports needed by your application here.
+```
+
+```json
+// File: angular.json
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "angular-upgrade-project": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/angular-upgrade-project",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "angular-upgrade-project:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "angular-upgrade-project:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "angular-upgrade-project:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "angular-upgrade-project:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "angular-upgrade-project:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "angular-upgrade-project"
+}
+```
