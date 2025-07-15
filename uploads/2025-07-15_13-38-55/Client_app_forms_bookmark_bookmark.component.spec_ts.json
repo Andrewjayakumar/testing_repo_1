@@ -1,0 +1,47 @@
+```
+typescript
+import { Component, OnInit } from '@angular/core';
+import { BookmarkService } from './bookmark.service';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+
+@Component({
+  selector: 'app-bookmark',
+  templateUrl: './bookmark.component.html',
+  styleUrls: ['./bookmark.component.scss']
+})
+export class BookmarkComponent implements OnInit {
+  bookmarks: any[] = [];
+  errorMessage: string = '';
+
+  constructor(private bookmarkService: BookmarkService) {}
+
+  ngOnInit(): void {
+    this.bookmarkService.getBookmarks()
+      .pipe(
+        catchError((error: Error) => {
+          this.errorMessage = error.message;
+          return of([]);
+        })
+      )
+      .subscribe((data: any[]) => {
+        this.bookmarks = data;
+      });
+  }
+
+  addBookmark(newBookmark: any): void {
+    this.bookmarkService.addBookmark(newBookmark)
+      .pipe(
+        catchError((error: Error) => {
+          this.errorMessage = error.message;
+          return of(null);
+        })
+      )
+      .subscribe(result => {
+        if (result) {
+          this.bookmarks.push(result);
+        }
+      });
+  }
+}
+```
