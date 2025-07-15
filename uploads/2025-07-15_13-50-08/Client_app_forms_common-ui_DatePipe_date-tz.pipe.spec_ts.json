@@ -1,0 +1,56 @@
+```
+typescript
+import { DateTzPipe } from './date-tz.pipe';
+
+describe('DateTzPipe', () => {
+  let pipe: DateTzPipe;
+
+  beforeEach(() => {
+    pipe = new DateTzPipe();
+  });
+
+  it('should create an instance', () => {
+    expect(pipe).toBeTruthy();
+  });
+});
+```
+
+```
+typescript
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'utcTimeAge'
+})
+export class UTCTimeAgePipe implements PipeTransform {
+  transform(value: any, ...args: unknown[]): string | null {
+    if (!value) {
+      return null;
+    }
+    const diff = Date.now() - new Date(value).getTime();
+    const seconds = Math.floor(diff / 1000);
+    if (seconds < 60) return `${seconds} seconds ago`;
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return `${minutes} minutes ago`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours} hours ago`;
+    const days = Math.floor(hours / 24);
+    return `${days} days ago`;
+  }
+}
+```
+
+```
+typescript
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { DateTzPipe } from './DatePipe/date-tz.pipe';
+import { UTCTimeAgePipe } from './UTCTimeAgeNow/utctimeage.pipe';
+
+@NgModule({
+  declarations: [DateTzPipe, UTCTimeAgePipe],
+  imports: [CommonModule],
+  exports: [DateTzPipe, UTCTimeAgePipe]
+})
+export class CommonCustomModule { }
+```
