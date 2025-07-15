@@ -1,0 +1,80 @@
+```
+```typescript
+// src/app/app.module.ts
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+```typescript
+// src/main.ts
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
+
+if (environment.production) {
+  enableProdMode();
+}
+
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
+```
+
+```typescript
+// src/app/app.component.ts
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent implements OnInit {
+  title = 'Angular Upgrade';
+  data: any;
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.http.get('/api/data')
+      .pipe(
+        map(response => response),
+        catchError(error => {
+          console.error(error);
+          return of(null);
+        })
+      )
+      .subscribe(result => {
+        this.data = result;
+      });
+  }
+}
+```
+
+```html
+<!-- src/app/app.component.html -->
+<div *ngIf="data; else loading">
+  <h1>{{ title }}</h1>
+  <pre>{{ data | json }}</pre>
+</div>
+<ng-template #loading>
+  <p>Loading data...</p>
+</ng-template>
+```
