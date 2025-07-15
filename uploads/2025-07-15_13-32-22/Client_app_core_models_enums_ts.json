@@ -1,0 +1,14 @@
+```typescript
+export function getActionName(action: { type?: string } | null | undefined): string {
+  return action?.type ?? 'UNKNOWN';
+}
+
+const typeCache: Record<string, boolean> = {};
+export function type<T extends string>(label: T): T {
+  if (typeCache[label]) {
+    throw new Error(`Action type "${label}" is not unique`);
+  }
+  typeCache[label] = true;
+  return label;
+}
+```
