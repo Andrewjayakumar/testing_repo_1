@@ -1,0 +1,12 @@
+```scss
+/* Home Component Styles */
+.home-container {
+  padding: 20px;
+  background-color: #f7f7f7;
+}
+
+.home-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+```
