@@ -1,0 +1,57 @@
+```
+typescript
+// File: /Client/app/forms/candidatesubmission/resumes-journals/resumes-journals.component.spec.ts
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ResumesJournalsComponent } from './resumes-journals.component';
+
+describe('ResumesJournalsComponent', () => {
+  let component: ResumesJournalsComponent;
+  let fixture: ComponentFixture<ResumesJournalsComponent>;
+
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ResumesJournalsComponent]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ResumesJournalsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+```
+
+```
+typescript
+// File: /Client/app/forms/common-ui/DatePipe/date-tz.pipe.ts
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'dateTz'
+})
+export class DateTzPipe implements PipeTransform {
+  transform(value: Date | string | number, ...args: any[]): string {
+    const date = new Date(value);
+    return date.toLocaleString();
+  }
+}
+```
+
+```
+html
+<!-- File: /Client/app/forms/candidatesubmission/resumes-journals/resumes-journals.component.html -->
+<div class="resume-journals">
+  <h2>Resumes & Journals</h2>
+  <ul>
+    <li *ngFor="let item of items">
+      {{ item.title }} - {{ item.date | dateTz }}
+    </li>
+  </ul>
+</div>
+```
