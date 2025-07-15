@@ -1,0 +1,56 @@
+```
+typescript
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class JwtHelperService {
+
+  /**
+   * Decodes a JWT token.
+   * @param token The JWT token to decode.
+   * @returns The decoded token payload.
+   */
+  public decodeToken(token: string): any {
+    if (!token) {
+      return null;
+    }
+    const parts = token.split('.');
+    if (parts.length !== 3) {
+      throw new Error('Invalid JWT token.');
+    }
+    return JSON.parse(atob(parts[1]));
+  }
+
+  /**
+   * Checks whether the token is expired.
+   * @param token The JWT token.
+   * @param offsetSeconds Number of seconds to offset the expiration time.
+   * @returns True if the token is expired, otherwise false.
+   */
+  public isTokenExpired(token: string, offsetSeconds: number = 0): boolean {
+    if (!token) return true;
+    const decoded: any = this.decodeToken(token);
+    if (!decoded || !decoded.exp) return true;
+    const date = new Date(0);
+    date.setUTCSeconds(decoded.exp);
+    return date.valueOf() <= new Date().valueOf() + offsetSeconds * 1000;
+  }
+
+  /**
+   * Retrieves the token's expiration date.
+   * @param token The JWT token.
+   * @returns The expiration date, or null if token doesn't have an exp claim.
+   */
+  public getTokenExpirationDate(token: string): Date | null {
+    const decoded: any = this.decodeToken(token);
+    if (!decoded || !decoded.exp) {
+      return null;
+    }
+    const date = new Date(0);
+    date.setUTCSeconds(decoded.exp);
+    return date;
+  }
+}
+```
