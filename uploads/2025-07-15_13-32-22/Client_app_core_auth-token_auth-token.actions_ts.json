@@ -1,0 +1,159 @@
+```
+```typescript
+// /Client/app/core/util/action-name-helper.ts
+export function toActionName(action: string): string {
+  return action.replace(/(?=[A-Z])/g, '-').toLowerCase();
+}
+```
+
+```css
+/* /Client/styles/heading.css */
+.heading {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+```
+
+```typescript
+// /Client/app/core/auth-token/auth-token.service.ts
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthTokenService {
+  constructor(private http: HttpClient) {}
+
+  getToken(): Observable<string> {
+    return this.http.get('/api/token', { responseType: 'text' }).pipe(
+      map(token => token),
+      catchError(error => throwError(() => error.error || new Error('Server error')))
+    );
+  }
+}
+```
+
+```typescript
+// /Client/app/core/models/enums.ts
+export enum UserRole {
+  Admin = 'ADMIN',
+  User = 'USER',
+  Guest = 'GUEST'
+}
+```
+
+```typescript
+// /Client/app/core/auth-store/auth.store.ts
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthStore {
+  private tokenSubject = new BehaviorSubject<string | null>(null);
+  token$ = this.tokenSubject.asObservable();
+
+  setToken(token: string): void {
+    this.tokenSubject.next(token);
+  }
+}
+```
+
+```typescript
+// /Client/app/core/core.module.ts
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@NgModule({
+  imports: [CommonModule]
+})
+export class CoreModule { }
+```
+
+```typescript
+// /Client/app/core/authservice/account-endpoint.service.ts
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AccountEndpointService {
+  constructor(private http: HttpClient) {}
+
+  getAccountDetails(): Observable<any> {
+    return this.http.get<any>('/api/account/details').pipe(
+      map(response => response)
+    );
+  }
+}
+```
+
+```typescript
+// /Client/app/core/authservice/auth-guard.service.ts
+import { Injectable } from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
+import { AuthStore } from '../auth-store/auth.store';
+import { Observable } from 'rxjs';
+import { take, map } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuardService implements CanActivate {
+  constructor(private authStore: AuthStore, private router: Router) {}
+
+  canActivate(): Observable<boolean> {
+    return this.authStore.token$.pipe(
+      take(1),
+      map(token => {
+        if (token) {
+          return true;
+        } else {
+          this.router.navigate(['/login']);
+          return false;
+        }
+      })
+    );
+  }
+}
+```
+
+```typescript
+// /Client/app/core/account/account.service.ts
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AccountService {
+  constructor(private http: HttpClient) {}
+
+  getUserAccount(): Observable<any> {
+    return this.http.get<any>('/api/account');
+  }
+}
+```
+
+```typescript
+// /Client/app/core/auth-token/auth-token.actions.ts
+export const AUTH_TOKEN_SET = '[Auth] Set';
+export const AUTH_TOKEN_CLEAR = '[Auth] Clear';
+
+export class SetAuthToken {
+  readonly type = AUTH_TOKEN_SET;
+  constructor(public payload: string) {}
+}
+
+export class ClearAuthToken {
+  readonly type = AUTH_TOKEN_CLEAR;
+}
+```
