@@ -1,0 +1,72 @@
+```
+<html>
+  <body>
+    <div *ngIf="project as proj">
+      <h1>{{ proj.name }}</h1>
+      <p>{{ proj.description }}</p>
+    </div>
+
+    <div>
+      <h2>Add Project</h2>
+      <h2>Update Project</h2>
+
+      <div>
+        <button type="button">Back</button>
+        <button type="button">New Requisition</button>
+      </div>
+
+      <div>
+        <div>
+          <label for="receivedDate">Received Date *</label>
+          <input id="receivedDate" type="date" required>
+          <div class="error">This field is required</div>
+        </div>
+
+        <div>
+          <label for="startDate">Start Date *</label>
+          <input id="startDate" type="date" required>
+          <div class="error">This field is required</div>
+        </div>
+
+        <div>
+          <label for="endDate">End Date *</label>
+          <input id="endDate" type="date" required>
+          <div class="error">This field is required</div>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <label>Project Duration (in Weeks)</label>
+        </div>
+        <div>
+          <label>Project Duration (in Months)</label>
+          <div>{{ datamodel.projectdurationweeks }}</div>
+          <div>{{ datamodel.projectdurationmonths }}</div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button">Cancel</button>
+        <button type="reset">Reset</button>
+        <button type="submit">Next</button>
+      </div>
+    </div>
+
+    <div>
+      <button type="button">Back</button>
+    </div>
+
+    <div>
+      <div>
+        <h3>{{ popupConfig.title }}</h3>
+        <p>{{ popupConfig.message }}</p>
+      </div>
+      <div>
+        <button type="button">Cancel</button>
+        <button type="button">Ok</button>
+      </div>
+    </div>
+  </body>
+</html>
+```
