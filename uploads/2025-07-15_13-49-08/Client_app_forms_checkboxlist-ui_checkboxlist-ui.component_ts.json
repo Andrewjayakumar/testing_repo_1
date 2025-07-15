@@ -1,0 +1,47 @@
+```
+<!-- checkboxlist-ui.component.html -->
+<div>
+  <p>
+    Please wait while we process your authentication...
+  </p>
+</div>
+```
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-checkboxlist-ui',
+  templateUrl: './checkboxlist-ui.component.html',
+  styleUrls: ['./checkboxlist-ui.component.css']
+})
+export class CheckboxlistUiComponent implements OnInit {
+  form!: FormGroup;
+
+  constructor(private fb: FormBuilder, private http: HttpClient) { }
+
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      checkboxes: ['']
+    });
+
+    this.getData().subscribe((data: any) => {
+      console.log(data);
+    });
+  }
+
+  getData(): Observable<any> {
+    return this.http.get<any>('https://api.example.com/data').pipe(
+      map((data: any) => data),
+      catchError(err => {
+        console.error(err);
+        return throwError(() => err);
+      })
+    );
+  }
+}
+```
