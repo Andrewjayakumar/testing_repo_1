@@ -1,0 +1,64 @@
+```
+typescript
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { DomSanitizer, SafeStyle, SafeHtml } from '@angular/platform-browser';
+
+@Component({
+  selector: 'app-card-ui',
+  templateUrl: './card-ui.component.html',
+  styleUrls: ['./card-ui.component.scss']
+})
+export class CardUiComponent implements OnInit {
+  @Input() control: any;
+  @Input() buttons: any;
+  @Input() data: any;
+  @Output() add = new EventEmitter<any>();
+  @Output() edit = new EventEmitter<any>();
+  @Output() delete = new EventEmitter<any>();
+  @Output() moveUp = new EventEmitter<any>();
+  @Output() moveDown = new EventEmitter<any>();
+
+  player: any;
+
+  constructor(private sanitizer: DomSanitizer) { }
+
+  ngOnInit(): void { }
+
+  getBackground(image: string): SafeStyle {
+    return this.sanitizer.bypassSecurityTrustStyle(`url(${image})`);
+  }
+
+  safeHtml(value: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(value);
+  }
+
+  addRow(data: any): void {
+    this.add.emit(data);
+  }
+
+  editRow(data: any): void {
+    this.edit.emit(data);
+  }
+
+  deleteRow(data: any): void {
+    this.delete.emit(data);
+  }
+
+  moveUpRow(data: any): void {
+    this.moveUp.emit(data);
+  }
+
+  moveDownRow(data: any): void {
+    this.moveDown.emit(data);
+  }
+
+  savePlayer(player: any): void {
+    this.player = player;
+    console.log('player instance', player);
+  }
+
+  onStateChange(event: any): void {
+    console.log('player state', event.data);
+  }
+}
+```
