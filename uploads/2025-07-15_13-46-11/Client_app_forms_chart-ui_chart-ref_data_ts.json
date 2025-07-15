@@ -1,0 +1,25 @@
+```
+typescript
+export class Data {
+  constructor(public id: number, public name: string) {}
+
+  getData(): string {
+    return this.name;
+  }
+}
+
+export const dataTypes: Array<{ inputFormat: string, data: string[] }> = [
+  {
+    inputFormat: "singleSeries",
+    data: ["X", "Y"] // ["name", "value"]
+  },
+  {
+    inputFormat: "multiSeries",
+    data: ["X", "Y"] // ["name", "seriesName", "seriesValue"]
+  },
+  {
+    inputFormat: "bubble",
+    data: ["X", "Y", "R"] // ["name", "seriesName", "seriesX", "seriesY", "seriesR"]
+  }
+];
+```
