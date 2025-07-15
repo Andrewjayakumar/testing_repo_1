@@ -1,0 +1,27 @@
+```
+typescript
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { CheckboxlistUiComponent } from './checkboxlist-ui.component';
+
+describe('CheckboxlistUiComponent', () => {
+  let component: CheckboxlistUiComponent;
+  let fixture: ComponentFixture<CheckboxlistUiComponent>;
+
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [CheckboxlistUiComponent]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(CheckboxlistUiComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+```
