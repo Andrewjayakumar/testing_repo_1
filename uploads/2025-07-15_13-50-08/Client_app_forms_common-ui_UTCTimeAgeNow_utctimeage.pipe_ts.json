@@ -1,0 +1,37 @@
+```
+typescript
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'utctimeage'
+})
+export class UTCTimeAgeNowPipe implements PipeTransform {
+  transform(value: any, ...args: any[]): any {
+    // custom logic here...
+    return value;
+  }
+}
+```
+
+```
+typescript
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { DateTzPipe } from './DatePipe/date-tz.pipe';
+import { UTCTimeAgeNowPipe } from './UTCTimeAgeNow/utctimeage.pipe';
+
+@NgModule({
+  declarations: [
+    DateTzPipe,
+    UTCTimeAgeNowPipe
+  ],
+  imports: [
+    CommonModule
+  ],
+  exports: [
+    DateTzPipe,
+    UTCTimeAgeNowPipe
+  ]
+})
+export class CommonCustomModule { }
+```
