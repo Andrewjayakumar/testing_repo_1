@@ -1,0 +1,39 @@
+```typescript
+export interface UserEditModel {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+}
+
+export function createUserEditModel(data?: Partial<UserEditModel>): UserEditModel {
+  return {
+    id: data?.id ?? 0,
+    firstName: data?.firstName ?? '',
+    lastName: data?.lastName ?? '',
+    email: data?.email ?? '',
+    role: data?.role ?? 'user'
+  };
+}
+```
+
+```typescript
+export interface UserEditModel {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+}
+
+export function createUserEditModel(data?: Partial<UserEditModel>): UserEditModel {
+  return {
+    id: data?.id ?? 0,
+    firstName: data?.firstName ?? '',
+    lastName: data?.lastName ?? '',
+    email: data?.email ?? '',
+    role: data?.role ?? 'user'
+  };
+}
+```
