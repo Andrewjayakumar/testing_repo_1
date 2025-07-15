@@ -1,0 +1,13 @@
+```typescript
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { ThankYouComponent } from './thank-you.component';
+
+@NgModule({
+  declarations: [ThankYouComponent],
+  imports: [CommonModule, HttpClientModule],
+  exports: [ThankYouComponent]
+})
+export class ThankYouModule { }
+```
