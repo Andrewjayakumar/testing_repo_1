@@ -1,0 +1,27 @@
+```
+typescript
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { CardUiComponent } from './card-ui.component';
+
+describe('CardUiComponent', () => {
+  let component: CardUiComponent;
+  let fixture: ComponentFixture<CardUiComponent>;
+
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ CardUiComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(CardUiComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+```
