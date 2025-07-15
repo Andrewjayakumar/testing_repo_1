@@ -1,0 +1,25 @@
+```typescript
+import { ReversePipe } from './reverse.pipe';
+
+describe('ReversePipe', () => {
+  let pipe: ReversePipe;
+
+  beforeEach(() => {
+    pipe = new ReversePipe();
+  });
+
+  it('should reverse a simple string', () => {
+    const input = 'angular';
+    const expectedOutput = 'ralugna';
+    expect(pipe.transform(input)).toEqual(expectedOutput);
+  });
+
+  it('should return null for null input', () => {
+    expect(pipe.transform(null)).toBeNull();
+  });
+
+  it('should return undefined for undefined input', () => {
+    expect(pipe.transform(undefined)).toBeUndefined();
+  });
+});
+```
