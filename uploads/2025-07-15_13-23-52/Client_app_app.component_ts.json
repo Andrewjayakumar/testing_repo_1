@@ -1,0 +1,386 @@
+```
+```json
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "projects": {
+    "my-project": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/my-project",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "my-project:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "my-project:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "my-project:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "my-project"
+}
+```
+
+```json
+{
+  "name": "my-project",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "~15.2.0",
+    "@angular/common": "~15.2.0",
+    "@angular/compiler": "~15.2.0",
+    "@angular/core": "~15.2.0",
+    "@angular/forms": "~15.2.0",
+    "@angular/platform-browser": "~15.2.0",
+    "@angular/platform-browser-dynamic": "~15.2.0",
+    "@angular/router": "~15.2.0",
+    "rxjs": "~7.5.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.12.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~15.2.0",
+    "@angular/cli": "~15.2.0",
+    "@angular/compiler-cli": "~15.2.0",
+    "@types/node": "^12.11.1",
+    "typescript": "~4.9.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.0.0",
+    "jasmine-core": "~4.5.0",
+    "jasmine-spec-reporter": "~5.0.0",
+    "protractor": "~7.0.0"
+  }
+}
+```
+
+```json
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "es2020",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  }
+}
+```
+
+```typescript
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
+
+if (environment.production) {
+  enableProdMode();
+}
+
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
+```
+
+```typescript
+/**
+ * This file includes polyfills needed by Angular and is loaded before the app.
+ * You can add your own extra polyfills to this file.
+ *
+ * The current setup is for "evergreen" browsers.
+ */
+
+/***************************************************************************************************
+ * BROWSER POLYFILLS
+ */
+
+/** ZoneJS is required by Angular itself. */
+import 'zone.js';  // Included with Angular CLI
+
+/***************************************************************************************************
+ * APPLICATION IMPORTS
+ */
+```
+
+```typescript
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+```typescript
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AppComponent } from './app.component';
+
+const routes: Routes = [
+  { path: '', component: AppComponent }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+```
+
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'my-project';
+}
+```
+
+```html
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <img src="assets/logo.png" alt="logo">
+</div>
+```
+
+```css
+/* Add component styles here */
+```
+
+```typescript
+export const environment = {
+  production: false
+};
+```
+
+```typescript
+export const environment = {
+  production: true
+};
+```
+
+```javascript
+exports.config = {
+  allScriptsTimeout: 11000,
+  specs: [
+    './src/**/*.e2e-spec.ts'
+  ],
+  capabilities: {
+    'browserName': 'chrome'
+  },
+  directConnect: true,
+  baseUrl: 'http://localhost:4200/',
+  framework: 'jasmine',
+  jasmineNodeOpts: {
+    showColors: true,
+    defaultTimeoutInterval: 30000,
+    isVerbose: false,
+    realtimeFailure: false
+  },
+  onPrepare() {
+    require('ts-node').register({
+      project: 'e2e/tsconfig.e2e.json'
+    });
+  }
+};
+```
+
+```json
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/e2e",
+    "module": "commonjs",
+    "target": "es5",
+    "types": [
+      "jasmine",
+      "node"
+    ]
+  }
+}
+```
+
+```typescript
+import { browser, by, element } from 'protractor';
+
+describe('workspace-project App', () => {
+  it('should display welcome message', async () => {
+    await browser.get('/');
+    expect(await element(by.css('app-root h1')).getText()).toEqual('Welcome to my-project!');
+  });
+});
+```
+
+```typescript
+import { browser, by, element } from 'protractor';
+
+export class AppPage {
+  async navigateTo(): Promise<unknown> {
+    return browser.get('/');
+  }
+
+  async getTitleText(): Promise<string> {
+    return element(by.css('app-root h1')).getText();
+  }
+}
+```
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against localhost",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}"
+    }
+  ]
+}
+```
+
+```json
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "ng serve",
+      "type": "shell",
+      "command": "ng serve",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "typescript",
+        "source": "ts",
+        "applyTo": "closedDocuments",
+        "fileLocation": [
+          "relative",
+          "${workspaceFolder}"
+        ],
+        "pattern": "$tsc-watch"
+      }
+    }
+  ]
+}
