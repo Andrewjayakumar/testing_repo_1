@@ -1,0 +1,27 @@
+```
+typescript
+import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { ChartService } from '../../../services/chart.service';
+
+@Component({
+  selector: 'app-chart-options',
+  templateUrl: './chart-options.component.html',
+  styleUrls: ['./chart-options.component.scss']
+})
+export class ChartOptionsComponent implements OnInit {
+  options: any;
+
+  constructor(private chartService: ChartService) { }
+
+  ngOnInit(): void {
+    this.chartService.getOptions()
+      .pipe(
+        map(data => data)
+      )
+      .subscribe(data => {
+        this.options = data;
+      });
+  }
+}
+```
