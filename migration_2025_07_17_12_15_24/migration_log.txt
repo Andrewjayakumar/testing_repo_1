@@ -1,0 +1,22 @@
+Angular 17 Migration Log - 2025_07_17_12_15_24
+
+Files Written:
+- src/app/app.component.ts
+- src/app/app.component.html
+- src/app/app.component.scss
+- src/app/components/my/my.component.ts
+- src/app/components/my/my.component.html
+- src/app/components/my/my.component.scss
+- src/app/services/auth.service.ts
+- src/app/app-routing.module.ts
+- src/app/app.module.ts
+- src/app/app.component.spec.ts
+- src/app/components/my/my.component.spec.ts
+
+Warnings:
+- Some components were missing additional style customizations – original style files have been preserved
+- Ensure that any legacy RxJS syntax is manually reviewed for potential further improvements
+- Manual review may be required for complex dependency injections not covered by the migration scripts
+
+Skipped Files:
+(none explicitly skipped in this migration batch)
