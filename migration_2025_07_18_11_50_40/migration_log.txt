@@ -1,0 +1,47 @@
+Angular 4 → 17 Migration Log
+Timestamp: 2025_07_18_11_50_40
+
+Files written:
+- src/app/app.component.ts
+- src/app/app.component.html
+- src/app/app.component.scss
+- src/app/components/home/home.component.ts
+- src/app/components/home/home.component.html
+- src/app/components/home/home.component.scss
+- src/app/services/auth.service.ts
+- src/app/services/user.service.ts
+- src/app/app-routing.module.ts
+- src/app/app.module.ts
+- src/app/app.component.spec.ts
+
+Conversion logs:
+AppComponent:
+  - Upgraded to standalone component
+  - Removed dependency on NgModule for this component
+  - Updated templateUrl and styleUrls to modern Angular standards
+HomeComponent:
+  - Upgraded to standalone component
+  - Removed component declarations from NgModule
+  - Modernized lifecycle hooks and injection patterns if applicable
+AuthService:
+  - Added providedIn: 'root' to promote tree-shakable providers
+  - Replaced deprecated Http module with HttpClient
+  - Updated service methods for modern RxJS usage
+UserService:
+  - Added providedIn: 'root' for faster module loading
+  - Simplified dependency injection structure
+app-routing.module.ts:
+  - Updated lazy loading syntax to dynamic import() style
+  - Refactored routing configuration to remove deprecated path settings
+app.module.ts:
+  - Removed declarations for standalone components
+  - Retained AppModule for legacy compatibility and bootstrapping
+  - Cleaned up module imports for Angular 17 standards
+app.component.spec.ts:
+  - Replaced TestBed.get() with TestBed.inject()
+  - Updated test module configuration for standalone components
+
+Warnings:
+- Some components were missing styles and/or test files – skipped those conversions with placeholders
+- @ViewChild(static: false) usage detected in legacy components – may require manual review
+- Circular dependency between AuthService and LoggerService noted – manual intervention might be required
